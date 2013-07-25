@@ -8,6 +8,7 @@ function Card(suit, value, filename) {
   this.suit = suit;
   this.value = value;
   this.imageFile = filename
+  this.flipped = false
 }
 
 function shuffle(deck)
@@ -36,8 +37,7 @@ for(var suit = 0; suit < suits.length; suit++)
 {
   for(var value = 0; value < values.length; value++)
   {
-    // var imageFile = pre + values[value] + "_of_" + suits[suit] + ext;
-    var imageFile = pre + "card_back.png";
+    var imageFile = pre + values[value] + "_of_" + suits[suit] + ext;
     var card = new Card(suits[suit], values[value], imageFile);
     deck.push(card);
   }
@@ -48,18 +48,18 @@ console.log(deck);
 shuffle(deck);
 
 function loadImages(sources, callback) {
-  var images = new Array();
+  var cardImages = new Array();
   var loadedImages = 0;
   var numImages = deck.length;
 
   for(var index = 0; index < deck.length; index++) {
-    images[index] = new Image();
-    images[index].onload = function() {
+    cardImages[index] = new Image();
+    cardImages[index].onload = function() {
       if(++loadedImages >= numImages) {
-        callback(images);
+        callback(cardImages);
       }
     };
-    images[index].src = sources[index];
+    cardImages[index].src = sources[index];
   }
 }
 var canvas = document.getElementById('myCanvas');
@@ -73,11 +73,18 @@ for(var index = 0; index < deck.length; index++)
   sources.push(deck[index].imageFile);
 }
 
-loadImages(sources, function(images) {
+//card back
+loadImages(sources, function(cardImages) {
   var cardX = 20;
-  for(var index = 0; index < deck.length; index++)
+  for(var index = 0; index < 2; index++)
   {
-    context.drawImage(images[index], cardX += images[index].width*.25/3, 30, images[index].width*.25, images[index].height*.25);
+    if(index%2 != 0){
+      var card_back = new Image();
+      card_back.src = pre + "card_back" + ext;
+      context.drawImage(card_back, cardX += cardImages[index].width*.25/3, 30, card_back.width*.25, card_back.height*.25);
+    }else{
+      context.drawImage(cardImages[index], cardX += cardImages[index].width*.25/3, 30, cardImages[index].width*.25, cardImages[index].height*.25);
+    }
   }
 });
 
