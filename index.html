@@ -8,16 +8,34 @@
       }
     </style>
   <meta charset="utf-8">
-  <title>CardsJS</title>
-  <meta name="description" content="cardsJS">
-  <meta name="author" content="roguequery">
+  <title>BLACKJACK</title>
+  <meta name="description" content="BLACKJACK">
+  <meta name="author" content="Nikhil Vasireddi">
   <link rel="stylesheet" href="css/styles.css">
     <script src="js/kinetic-v4.5.4.min.js"></script>
   </head>
   <body>
-    <h1 id="title">Welcome to cardsJS</h1>
+    <font size = "7">
+    <font color="#FFFFFF"><marquee bgcolor="#073C0A" direction="right" loop="999999" width="100%">BLACKJACK</marquee></font>
+    <center>
+    </font>
+    <input type="button" value ="Rules/Help" onClick ="getR()"style="height: 40px; width: 110px"></input><br/>
+    
+    </center>
     <!--     <div id="container"></div> -->
     <canvas id="myCanvas"></canvas>
+    <center>
+    <input type="button" value ="HIT" onClick="hit('player')"style="height: 40px; width: 80px"></input>
+    <input type="button" value ="STAND" onClick="stand()"style="height: 40px; width: 110px"></input>
+    <input type="button" value ="SPLIT" onClick="split()"style="height: 40px; width: 110px"></input>
+    <input type="button" id="na" value ="DOUBLE DOWN" onClick="doubleDown()"style="height: 40px; width: 150px"></input>
+    <font size = "6">
+    <p id="totalmoney">1000</p><p></p>
+    <p id="totalbet">0</p><p></p>
+    </font>
+    <button onclick="bid('up')" id="in">INCREASE BET</button>
+    <button onclick="bid('down')" id="de">DECREASE BET</button>
+    </center>
     <script src="js/scripts.js"></script>
   </body>
 </html>
